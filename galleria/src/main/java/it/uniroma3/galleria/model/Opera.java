@@ -24,7 +24,7 @@ public class Opera {
 	private int operaId;							//operaId e' la chiave primaria generata dal sistema
 	
 	@Column(nullable = false)
-	private String CodiceOpera;						//CodiceOpera e' una chiave di ricerca assegnata dagli admin
+	private String codiceOpera;						//CodiceOpera e' una chiave di ricerca assegnata dagli admin
 	
 	@Column(nullable=false)
 	private String titolo;
@@ -50,7 +50,7 @@ public class Opera {
 	public Opera(String codiceOpera, String titolo, Artista artista, String tecnica, Date anno,
 			int dimensioneL, int dimensioneA) {
 		super();
-		CodiceOpera = codiceOpera;
+		this.codiceOpera = codiceOpera;
 		this.artista = artista;
 		this.tecnica = tecnica;
 		this.anno = anno;
@@ -61,11 +61,11 @@ public class Opera {
 	
 
 	public String getCodiceOpera() {
-		return CodiceOpera;
+		return codiceOpera;
 	}
 	
 	public void setCodiceOpera(String codiceOpera) {
-		CodiceOpera = codiceOpera;
+		this.codiceOpera = codiceOpera;
 	}
 	
 	public int getOperaId() {
@@ -131,7 +131,7 @@ public class Opera {
         final StringBuilder sb = new StringBuilder();
         sb.append("Opera");
         sb.append("{id=").append(operaId);
-        sb.append(", codice=").append(CodiceOpera);
+        sb.append(", codice=").append(codiceOpera);
         sb.append(", titolo=").append(titolo);
         sb.append(", artista=").append(artista.getNomeArtista()).append("' ").append(artista.getCognomeArtista());
         sb.append(", anno=").append(anno);
