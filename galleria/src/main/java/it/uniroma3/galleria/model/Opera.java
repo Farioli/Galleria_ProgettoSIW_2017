@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
@@ -19,24 +20,22 @@ import javax.persistence.TemporalType;
 public class Opera {
 	
 	@Id
-	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int operaId;							//operaId e' la chiave primaria generata dal sistema
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String CodiceOpera;						//CodiceOpera e' una chiave di ricerca assegnata dagli admin
 	
 	@Column(nullable=false)
 	private String titolo;
 	
-	@Column(nullable = false)
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "artista")
 	private Artista artista;						//artista che ha creato l'opera
 	
 	@Column(nullable = false)
 	private String tecnica;
 	
-	@Column
 	@Temporal(TemporalType.DATE)
 	private Date anno;
 	

@@ -3,6 +3,7 @@ package it.uniroma3.galleria.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -19,12 +21,11 @@ import javax.persistence.TemporalType;
 public class Artista {
 	
 	@Id
-	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int artistaId;							//artistaId e' la chiave primaria generata dal sistema
 	
-	@Column(nullable = false)
-	private String CodiceArtista;					//CodiceArtista e' una chiave di ricerca assegnata dagli admin
+	@Column(nullable = false, unique = true)
+	private String codiceArtista;					//codiceArtista e' una chiave di ricerca assegnata dagli admin
 	
 	@Column(nullable = false)
 	private String nomeArtista;
@@ -39,18 +40,18 @@ public class Artista {
 	@Temporal(TemporalType.DATE)
 	private Date annoNascita;
 	
-	@Column
 	@Temporal(TemporalType.DATE)
 	private Date annoMorte;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "artista, cascade = CascadeType.REMOVE")
+	@OneToMany(mappedBy = "artista", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OrderBy("anno asc")
 	private List<Opera> opere;
 	
 	
 	public Artista(String codiceArtista, String nomeArtista, String cognomeArtista, String nazionalita,
 			Date annoNascita, Date annoMorte) {
 		super();
-		CodiceArtista = codiceArtista;
+		this.codiceArtista = codiceArtista;
 		this.nomeArtista = nomeArtista;
 		this.cognomeArtista = cognomeArtista;
 		this.nazionalita = nazionalita;
@@ -65,11 +66,11 @@ public class Artista {
 	}
 	
 	public String getCodiceArtista() {
-		return CodiceArtista;
+		return codiceArtista;
 	}
 
 	public void setCodiceArtista(String codiceArtista) {
-		CodiceArtista = codiceArtista;
+		this.codiceArtista = codiceArtista;
 	}
 
 	
@@ -117,7 +118,7 @@ public class Artista {
 
 	@Override
 	public int hashCode() {
-		return this.CodiceArtista.hashCode();
+		return this.codiceArtista.hashCode();
 	}
 
 	@Override
@@ -130,7 +131,7 @@ public class Artista {
         final StringBuilder sb = new StringBuilder();
         sb.append("Artista");
         sb.append("{id=").append(artistaId);
-        sb.append(", codice=").append(CodiceArtista);
+        sb.append(", codice=").append(codiceArtista);
         sb.append(", nome=").append(nomeArtista);
         sb.append(", cognome=").append(cognomeArtista);
         sb.append(", anno nascita=").append(annoNascita);

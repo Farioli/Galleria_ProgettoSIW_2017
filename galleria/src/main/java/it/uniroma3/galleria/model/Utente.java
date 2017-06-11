@@ -14,7 +14,6 @@ import javax.persistence.TemporalType;
 public class Utente {
 	
 	@Id
-	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int utenteId;
 	
@@ -34,7 +33,7 @@ public class Utente {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascita;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	
