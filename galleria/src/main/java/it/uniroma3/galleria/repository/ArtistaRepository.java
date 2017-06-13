@@ -8,7 +8,7 @@ import it.uniroma3.galleria.model.Artista;
 
 public interface ArtistaRepository extends CrudRepository<Artista, Long> {
 	
-	List<Artista> findByCodiceArtista(String codiceArtista);
+	Artista findByCodiceArtista(String codiceArtista);
 	
 	List<Artista> findByNomeArtista(String nomeArtista);
 	

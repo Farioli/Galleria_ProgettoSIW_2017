@@ -19,12 +19,12 @@ public class ArtistaController {
 	@Autowired
 	private ArtistaService artistaservice;
 	
-	@GetMapping("/artista.jsp")
+	@GetMapping("/artista")
 	public String showForm(Artista artista){
 		return "/form.jsp";
 	}
 	
-	@PostMapping("/artista.jsp")
+	@PostMapping("/artista")
 	public String checkArtistaInfo(@Valid  @ModelAttribute Artista artista, BindingResult bindingResult, Model model){
 		if (bindingResult.hasErrors()) {
 	      return "/form.jsp";
